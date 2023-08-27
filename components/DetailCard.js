@@ -86,6 +86,7 @@ const style = StyleSheet.create({
     borderTopRightRadius: 30,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
+    cursor: 'pointer'
   },
   headingContainer: {
     top: 441,

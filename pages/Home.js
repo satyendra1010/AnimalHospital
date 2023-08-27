@@ -86,6 +86,7 @@ const style = StyleSheet.create({
     top: 318,
     backgroundColor: "#D9D9D9",
     borderRadius: "0px 5px 5px 0px",
+    cursor: "pointer",
   },
   leftInnerBar: {
     position: "absolute",
@@ -104,6 +105,7 @@ const style = StyleSheet.create({
     top: 164,
     backgroundColor: "#E3E3E3",
     borderRadius: "0px 5px 5px 0px",
+    cursor: "pointer",
   },
   searchEllipse1: {
     position: "absolute",
