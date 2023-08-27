@@ -9,9 +9,9 @@ const Home = () => {
   return (
     <div style={style.background}>
       <div
+        style={detail ? { display: "None" } : { display: "block" }}
         onClick={() => setFilter(!filter)}
       >
-        {console.log(filter)}
         {filter ? (
           <div style={style.openFilter}>
             <FilterIcons link="/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/serach.png" />
@@ -164,6 +164,6 @@ const style = StyleSheet.create({
     top: 186,
     left: 111,
     backgroundColor: "#BB2A2A",
-    cursor: 'Pointer'
+    cursor: "Pointer",
   },
 });
