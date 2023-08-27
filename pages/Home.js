@@ -1,12 +1,16 @@
 import { StyleSheet, ImageBackground, View, Image } from "react-native";
 import { useState } from "react";
 import FilterIcons from "../components/FilterIcons";
+import DetailCard from "../components/DetailCard";
 
 const Home = () => {
   const [filter, setFilter] = useState(false);
+  const [detail, setDetail] = useState(false);
   return (
     <div style={style.background}>
-      <div onClick={() => setFilter(!filter)}>
+      <div
+        onClick={() => setFilter(!filter)}
+      >
         {console.log(filter)}
         {filter ? (
           <div style={style.openFilter}>
@@ -15,14 +19,12 @@ const Home = () => {
             <div style={style.searchEllipse2}></div>
             <div style={style.searchEllipse3}></div>
             <div style={style.searchEllipse4}></div>
-            {/* <div style={style.downArrow}> */}
-            <View style={style.downArrow}>
+            <div style={style.downArrow}>
               <ImageBackground
                 source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/downArrow.png")}
                 resizeMode="cover"
               />
-            </View>
-            {/* </div> */}
+            </div>
           </div>
         ) : (
           <div style={style.leftSideBar}>
@@ -30,8 +32,18 @@ const Home = () => {
           </div>
         )}
       </div>
-
-      <div style={style.cameraContainer}>
+      <div onClick={() => setDetail(!detail)}>
+        {detail ? (
+          <DetailCard />
+        ) : (
+          <ImageBackground
+            source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/location.png")}
+            style={style.locationIcon}
+            resizeMode="contain"
+          />
+        )}
+      </div>
+      <div style={detail ? { display: "None" } : style.cameraContainer}>
         <ImageBackground
           source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/Group 19.png")}
           style={style.camera}
@@ -138,5 +150,20 @@ const style = StyleSheet.create({
     rotation: -90,
     backgroundColor: "#7B7A7A",
     border: 4,
+  },
+  location: {
+    position: "absolute",
+    left: "28.46%",
+    right: "67.95%",
+    top: "22.04%",
+    bottom: "75.83%",
+  },
+  locationIcon: {
+    width: 14,
+    height: 18,
+    top: 186,
+    left: 111,
+    backgroundColor: "#BB2A2A",
+    cursor: 'Pointer'
   },
 });
