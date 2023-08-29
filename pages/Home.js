@@ -1,4 +1,4 @@
-import { StyleSheet, ImageBackground, View, Image } from "react-native";
+import { StyleSheet, Image, ImageBackground } from "react-native";
 import { useState } from "react";
 import FilterIcons from "../components/FilterIcons";
 import DetailCard from "../components/DetailCard";
@@ -8,21 +8,28 @@ const Home = () => {
   const [detail, setDetail] = useState(false);
   return (
     <div style={style.background}>
+      <div style={style.filtersContainer}>
+          <button style={style.filters1}>Sort by</button>
+          <button style={style.filters2}>Vet Hospital</button>
+          <button style={style.filters3}>Open</button>
+          <button style={style.filters4}>Distance</button>
+      </div>
       <div
         style={detail ? { display: "None" } : { display: "block" }}
         onClick={() => setFilter(!filter)}
       >
         {filter ? (
           <div style={style.openFilter}>
-            <FilterIcons link="/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/serach.png" />
+            <FilterIcons />
             <div style={style.searchEllipse1}></div>
             <div style={style.searchEllipse2}></div>
             <div style={style.searchEllipse3}></div>
             <div style={style.searchEllipse4}></div>
-            <div style={style.downArrow}>
+            <div>
               <ImageBackground
-                source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/downArrow.png")}
+                source={require("../assets/downArrow.png")}
                 resizeMode="cover"
+                style={style.downArrow}
               />
             </div>
           </div>
@@ -36,11 +43,14 @@ const Home = () => {
         {detail ? (
           <DetailCard />
         ) : (
-          <ImageBackground
-            source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/location.png")}
-            style={style.locationIcon}
-            resizeMode="contain"
-          />
+          <>
+            <ImageBackground
+              source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/location.png")}
+              style={style.locationIcon}
+              resizeMode="contain"
+            />
+            <p style={style.locationText}>You're here</p>
+          </>
         )}
       </div>
       <div style={detail ? { display: "None" } : style.cameraContainer}>
@@ -48,6 +58,13 @@ const Home = () => {
           source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/Group 19.png")}
           style={style.camera}
           resizeMode="cover"
+        />
+      </div>
+      <div style={detail ? { display: "None" } : style.cameraContainer}>
+        <ImageBackground
+          source={require("../assets/pawImage.png")}
+          style={style.pawImage}
+          resizeMode="contain"
         />
       </div>
     </div>
@@ -145,9 +162,9 @@ const style = StyleSheet.create({
   },
   downArrow: {
     position: "absolute",
-    width: 12.5,
-    height: 25,
-    left: 35,
+    width: 30,
+    height: 30,
+    left: 30,
     top: 520,
     rotation: -90,
     backgroundColor: "#7B7A7A",
@@ -161,11 +178,74 @@ const style = StyleSheet.create({
     bottom: "75.83%",
   },
   locationIcon: {
-    width: 14,
-    height: 18,
-    top: 186,
-    left: 111,
-    backgroundColor: "#BB2A2A",
+    width: 20,
+    height: 20,
+    top: 411,
+    left: 196,
+    backgroundColor: "#fffff",
     cursor: "Pointer",
+  },
+  locationText: {
+    position: "absolute",
+    width: 86,
+    height: 19,
+    top: 418,
+    left: 167,
+  },
+  pawImage: {
+    position: "absolute",
+    width: 110,
+    height: 123,
+    top: 700,
+    left: 288,
+  },
+  filtersContainer: {
+    display: "flex",
+    flexDriection: "row",
+    justifyContent: "space-between",
+  },
+  filters1: {
+    position: "absolute",
+    width: 88,
+    height: 28,
+    top: 97,
+    left: 20,
+    padding: "4px 4px 4px 12px",
+    borderRadius: 6,
+    border: 1,
+    cursor: 'Pointer'
+  },
+  filters2: {
+    position: "absolute",
+    width: 88,
+    height: 28,
+    top: 97,
+    left: 120,
+    padding: "4px 4px 4px 12px",
+    borderRadius: 6,
+    border: 1,
+    cursor: 'Pointer'
+  },
+  filters3: {
+    position: "absolute",
+    width: 88,
+    height: 28,
+    top: 97,
+    left: 210,
+    padding: "4px 4px 4px 12px",
+    borderRadius: 6,
+    border: 1,
+    cursor: 'Pointer'
+  },
+  filters4: {
+    position: "absolute",
+    width: 88,
+    height: 28,
+    top: 97,
+    left: 300,
+    padding: "4px 4px 4px 12px",
+    borderRadius: 6,
+    border: 1,
+    cursor: 'Pointer'
   },
 });
