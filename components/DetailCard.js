@@ -1,72 +1,117 @@
-import { ImageBackground, StyleSheet } from "react-native";
+import { useEffect } from "react";
+import { ImageBackground, StyleSheet, View, Text } from "react-native";
 
-const DetailCard = () => {
+const DetailCard = (props) => {
+  const top = {
+    top: props.top,
+    borderTopLeftRadius: props.topLeftRadius,
+    borderTopRightRadius: props.topRightRadius,
+    borderBottomLeftRadius: props.bottomLeftRadius,
+    borderBottomRightRadius: props.bottomRightRadius,
+  };
+  const params = {
+    "Content-Type": "application/json",
+    "Access-Control-Request-Headers": "*",
+    "Access-Control-Allow-Origin": "*",
+    "api-key":
+      "lY9qRezZIKpogsQBICtTL1AB3NEh0g5biAeHM8k33RTxlkq51oYnSnOvr7ZVUHS8",
+    Accept: "application/ejson",
+  };
+
+  const bodyData = {
+    collection: "clinics",
+    database: "veterinarian_clinics",
+    dataSource: "Cluster0",
+  };
+
+  const details = async () => {
+    let queryString = Object.keys(params)
+      .map((key) => key + "=" + params[key])
+      .join("&");
+    try {
+      const url =
+        "https://us-east-1.aws.data.mongodb-api.com/app/data-pngam/endpoint/data/v1/action/find?" + queryString;
+      let response = await fetch(url, {
+        method: "POST",
+
+        body: JSON.stringify(bodyData),
+      });
+      let json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+    details();
+  }, []);
+
   return (
-    <div style={style.container}>
-      <div style={style.headingContainer}>
-        <div style={style.heading}>
-          <p style={style.headingFont}>Outside Animal Hospital</p>
-        </div>
+    <View style={[style.container, top]}>
+      <View style={style.headingContainer}>
+        <View style={style.heading}>
+          <Text style={style.headingFont}>Outside Animal Hospital</Text>
+        </View>
         <ImageBackground
-          source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/star.png")}
+          source={require("../assets/star.png")}
           style={style.rating}
           resizeMode="contain"
         />
-        <div style={style.reivews}>
-          <p style={style.reviewsText}>(426)</p>
-        </div>
-        <div style={style.type}>
-          <p style={style.typeText}>Veterinarian</p>
-        </div>
+        <View style={style.reivews}>
+          <Text style={style.reviewsText}>(426)</Text>
+        </View>
+        <View style={style.type}>
+          <Text style={style.typeText}>Veterinarian</Text>
+        </View>
         <ImageBackground
-          source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/location.png")}
+          source={require("../assets/location.png")}
           style={style.distance}
           resizeMode="contain"
         />
-        <div style={style.distanceText}>
-          <p>1.5km</p>
-        </div>
+        <View style={style.distanceText}>
+          <Text>1.5km</Text>
+        </View>
         <ImageBackground
-          source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/car.png")}
+          source={require("../assets/car.png")}
           style={style.car}
           resizeMode="contain"
         />
-        <div style={style.carText}>
-          <p>8 min</p>
-        </div>
+        <View style={style.carText}>
+          <Text>8 mins</Text>
+        </View>
         <ImageBackground
-          source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/pinpoint.png")}
+          source={require("../assets/pinpoint.png")}
           style={style.position}
           resizeMode="contain"
         />
-        <div style={style.positionText}>
-          <p>268 Park Ave, Town</p>
-        </div>
-      </div>
-      <div style={style.appointmentContainer}>
+        <View style={style.positionText}>
+          <Text>268 Park Ave, Town</Text>
+        </View>
+      </View>
+      <View style={style.appointmentContainer}>
         <ImageBackground
-          source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/calendar.png")}
+          source={require("../assets/calendar.png")}
           style={style.appointmentCalendar}
           resizeMode="contain"
         />
-        <div style={style.appointmentText}>
-          <p>Book an Appointment</p>
-        </div>
-      </div>
-      <div>
-        <div style={style.gridLeftBox}></div>
-        <div style={style.gridContainer}>
-          <div style={style.gridRow}>
-            <div style={style.gridSquare}></div>
-            <div style={style.gridSquare}></div>
-          </div>
-          <div style={style.gridRow}>
-            <div style={style.gridSquare}></div>
-            <div style={style.gridSquare}></div>
-          </div>
-        </div>
-      </div>
-    </div>
+        <View style={style.appointmentText}>
+          <Text>Book an Appointment</Text>
+        </View>
+      </View>
+      <View>
+        <View style={style.gridLeftBox}></View>
+        <View style={style.gridContainer}>
+          <View style={style.gridRow}>
+            <View style={style.gridSquare}></View>
+            <View style={style.gridSquare}></View>
+          </View>
+          <View style={style.gridRow}>
+            <View style={style.gridSquare}></View>
+            <View style={style.gridSquare}></View>
+          </View>
+        </View>
+      </View>
+    </View>
   );
 };
 
@@ -77,20 +122,15 @@ const style = StyleSheet.create({
     boxSizing: "border-box",
     position: "absolute",
     width: 390,
-    height: 446,
+    height: 440,
     left: 0,
-    top: 398,
     backgroundColor: "#FFFFFFB8",
     border: "1px solid #EBEBEB",
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    cursor: 'pointer'
+    cursor: "pointer",
   },
   headingContainer: {
-    top: 441,
-    left: 30,
+    position: "relative",
+    left: -1,
   },
   headingFont: {
     fontFamily: "Roboto",
@@ -103,12 +143,12 @@ const style = StyleSheet.create({
     width: 79.3105239868164,
     height: 13.422122955322266,
     left: 30,
+    top: 12,
   },
   reivews: {
-    position: "absolute",
+    position: "relative",
     width: 42,
     height: 17,
-    top: 66,
     left: 118,
   },
   reviewsText: {
@@ -122,7 +162,7 @@ const style = StyleSheet.create({
     position: "absolute",
     width: 142,
     height: 21,
-    top: 64,
+    top: 71,
     left: 160,
   },
   typeText: {
@@ -132,82 +172,82 @@ const style = StyleSheet.create({
     textAlign: "left",
   },
   distance: {
-    position: "absolute",
+    position: "relative",
     width: 17,
     height: 17,
-    top: 110,
+    top: 10,
     left: 26,
     backgroundColor: "Navyblue",
   },
   distanceText: {
-    position: "absolute",
+    position: "relative",
     width: 43,
     height: 17,
-    top: 96,
+    top: -8,
     left: 50,
   },
   car: {
-    position: "absolute",
+    position: "relative",
     width: 20,
     height: 20,
-    top: 110,
-    left: 140,
+    top: -25,
+    left: 120,
   },
   carText: {
-    position: "absolute",
-    width: 42,
+    position: "relative",
+    width: 45,
     height: 20,
-    top: 98,
-    left: 170,
+    top: -40,
+    left: 145,
   },
   position: {
-    position: "absolute",
+    position: "relative",
     width: 25,
     height: 25,
-    top: 153,
+    top: -30,
     left: 24,
   },
   positionText: {
-    position: "absolute",
+    position: "relative",
     width: 142,
     height: 21,
-    top: 144,
     left: 50,
+    top: -47,
   },
   appointmentContainer: {
     position: "absolute",
     width: 327,
     height: 40,
     left: 30,
-    top: 200,
+    top: 175,
     bottom: "27.73%",
     backgroundColor: "#DADADA",
     borderRadius: 10,
   },
   appointmentCalendar: {
-    position: "absolute",
+    position: "relative",
     width: 25.096525192260742,
     height: 25,
     top: 7,
     left: 85,
   },
   appointmentText: {
-    position: "absolute",
+    position: "relative",
     left: 120,
-    top: -4,
+    top: -14,
   },
   gridLeftBox: {
     width: 150,
-    height: 185,
-    top: 260,
+    height: 190,
     left: 9,
-    position: "absolute",
+    top: 33,
+    position: "relative",
     backgroundColor: "#D9D9D9",
   },
   gridContainer: {
-    position: "absolute",
-    top: 256,
-    left: 170,
+    position: "relative",
+    left: 83,
+    top: -163,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

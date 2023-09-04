@@ -1,14 +1,14 @@
-import { StyleSheet, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground, View } from "react-native";
 
 const FilterIcons = (props) => {
   return (
-    <div>
+    <View>
       <ImageBackground
         source={require('../assets/serach.png')}
         style={style.searchIcon}
         resizeMode="cover"
       />
-    </div>
+    </View>
   );
 };
 
@@ -17,8 +17,8 @@ export default FilterIcons;
 const style = StyleSheet.create({
   searchIcon: {
     position: "absolute",
-    width: 32,
-    height: 32,
+    width: 26,
+    height: 25,
     left: 31,
     top: 30,
   },

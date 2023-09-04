@@ -8,15 +8,14 @@ import {
 
 const Navbar = () => {
   return (
-    <div>
-      <div>
-        <div style={styles.navbar}></div>
-      </div>
-      <div>
-        <button style={styles.back}>
-          {" "}
+    <View>
+      <View>
+        <View style={styles.navbar}></View>
+      </View>
+      <View>
+        <TouchableOpacity style={styles.back}>
           <ImageBackground
-            source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/button.png")}
+            source={require("../assets/button.png")}
             style={{
               width: 53,
               height: 22,
@@ -25,20 +24,23 @@ const Navbar = () => {
             }}
             resizeMode="cover"
           />
-        </button>
-      </div>
-      <div>
-        <button onClick={() => alert("Button Pressed!")} style={styles.user}>
-          User
-        </button>
-      </div>
-    </div>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.user}>
+        <TouchableOpacity onClick={() => alert("Button Pressed!")}>
+          <Text style={styles.userText}>User</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
 export default Navbar;
 
 const styles = StyleSheet.create({
+  container: {
+    position: "absolute",
+  },
   navbar: {
     position: "absolute",
     width: 390,
@@ -53,7 +55,6 @@ const styles = StyleSheet.create({
     height: 22,
     top: 49,
     left: 10,
-    // backgroundColor: "Transparent",
     border: "None",
     padding: "3px, 4px, 3px, 8px",
     gap: 2,
@@ -70,13 +71,13 @@ const styles = StyleSheet.create({
     border: "None",
     borderRadius: 50,
     cursor: "Pointer",
-    fontFamily: "Roboto",
-    fontStyle: 'normal',
-    fontWeight: 400,
-    fontSize: 11,
-    // /* identical to box height, or 145% */
-    textAlign: "center",
-
-    color: "#000000"
+    alignItems: 'center'
   },
+  userText:{
+    fontFamily: "Roboto",
+    fontSize: 11,
+    lineHeight: 16,
+    color: "#000000",
+    paddingTop: 12,
+    },
 });

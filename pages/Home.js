@@ -1,73 +1,103 @@
-import { StyleSheet, Image, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  ImageBackground,
+  View,
+  TouchableOpacity,
+  Text,
+  ScrollView
+} from "react-native";
 import { useState } from "react";
 import FilterIcons from "../components/FilterIcons";
 import DetailCard from "../components/DetailCard";
+import Navbar from "./Navbar";
 
 const Home = () => {
   const [filter, setFilter] = useState(false);
   const [detail, setDetail] = useState(false);
   return (
-    <div style={style.background}>
-      <div style={style.filtersContainer}>
-          <button style={style.filters1}>Sort by</button>
-          <button style={style.filters2}>Vet Hospital</button>
-          <button style={style.filters3}>Open</button>
-          <button style={style.filters4}>Distance</button>
-      </div>
-      <div
+    <View style={style.background}>
+      <Navbar />
+      <View style={{top:90}}>
+      <ScrollView horizontal={true} contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', margin: 10 }}>
+        <TouchableOpacity style={style.filters}>
+          <Text style={style.filtersText}>Sort by</Text>
+          <Image source={require('../assets/gridicons_dropdown.png')} resizeMode='contain' style={{height: 19, width: 19}}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.filters}>
+          <Text style={style.filtersText}>Vet Hospital</Text>
+          <Image source={require('../assets/gridicons_dropdown.png')} resizeMode='contain' style={{height: 19, width: 19}}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.filters}>
+          <Text style={style.filtersText}>Open</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.filters}>
+          <Text style={style.filtersText}>Distance</Text>
+        </TouchableOpacity>
+        </ScrollView>
+      </View>
+      <View
         style={detail ? { display: "None" } : { display: "block" }}
         onClick={() => setFilter(!filter)}
       >
-        {filter ? (
-          <div style={style.openFilter}>
-            <FilterIcons />
-            <div style={style.searchEllipse1}></div>
-            <div style={style.searchEllipse2}></div>
-            <div style={style.searchEllipse3}></div>
-            <div style={style.searchEllipse4}></div>
-            <div>
-              <ImageBackground
-                source={require("../assets/downArrow.png")}
-                resizeMode="cover"
-                style={style.downArrow}
-              />
-            </div>
-          </div>
-        ) : (
-          <div style={style.leftSideBar}>
-            <div style={style.leftInnerBar}></div>
-          </div>
-        )}
-      </div>
-      <div onClick={() => setDetail(!detail)}>
-        {detail ? (
-          <DetailCard />
-        ) : (
-          <>
-            <ImageBackground
-              source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/location.png")}
-              style={style.locationIcon}
-              resizeMode="contain"
+        <TouchableOpacity onPress={() => setFilter(!filter)}>
+          {filter ? (
+            <View style={style.openFilter}>
+              <FilterIcons />
+              <View style={style.searchEllipse1}></View>
+              <View style={style.searchEllipse2}></View>
+              <View style={style.searchEllipse3}></View>
+              <View style={style.searchEllipse4}></View>
+              <View>
+                <ImageBackground
+                  source={require("../assets/downArrow.png")}
+                  resizeMode="cover"
+                  style={style.downArrow}
+                />
+              </View>
+            </View>
+          ) : (
+            <View style={style.leftSideBar}>
+              <View style={style.leftInnerBar}></View>
+            </View>
+          )}
+        </TouchableOpacity>
+      </View>
+      <View onClick={() => setDetail(!detail)}>
+        <TouchableOpacity onPress={() => setDetail(!detail)}>
+          {detail ? (
+            <DetailCard
+              top={398}
+              topLeftRadius={30}
+              topRightRadius={30}
+              bottomLeftRadius={0}
+              bottomRightRadius={0}
             />
-            <p style={style.locationText}>You're here</p>
-          </>
-        )}
-      </div>
-      <div style={detail ? { display: "None" } : style.cameraContainer}>
+          ) : (
+            <>
+              <ImageBackground
+                source={require("../assets/location.png")}
+                style={style.locationIcon}
+                resizeMode="contain"
+              />
+              <Text style={style.locationText}>You're here</Text>
+            </>
+          )}
+        </TouchableOpacity>
+      </View>
+      <View style={detail ? { display: "None" } : style.cameraContainer}>
         <ImageBackground
-          source={require("/Users/aviral/Desktop/Animal Hospital/AnimalHospital/assets/Group 19.png")}
+          source={require("../assets/Group 19.png")}
           style={style.camera}
           resizeMode="cover"
         />
-      </div>
-      <div style={detail ? { display: "None" } : style.cameraContainer}>
-        <ImageBackground
-          source={require("../assets/pawImage.png")}
-          style={style.pawImage}
-          resizeMode="contain"
-        />
-      </div>
-    </div>
+                <ImageBackground
+                  source={require("../assets/pawImage.png")}
+                  style={style.pawImage}
+                  resizeMode="contain"
+                />
+      </View>
+    </View>
   );
 };
 
@@ -75,20 +105,19 @@ export default Home;
 
 const style = StyleSheet.create({
   camera: {
-    position: "absolute",
     width: 60,
     height: 60,
     cursor: "Pointer",
     backgroundColor: "Transparent",
-    top: 747,
+    top: 700,
     left: 165,
   },
   background: {
+    position: "absolute",
     width: 390,
     height: 844,
     left: 0,
     top: 0,
-
     backgroundColor: "#EBEBEB",
   },
   cameraContainer: {
@@ -162,12 +191,11 @@ const style = StyleSheet.create({
   },
   downArrow: {
     position: "absolute",
-    width: 30,
-    height: 30,
+    width: 29,
+    height: 18,
     left: 30,
     top: 520,
     rotation: -90,
-    backgroundColor: "#7B7A7A",
     border: 4,
   },
   location: {
@@ -189,63 +217,30 @@ const style = StyleSheet.create({
     position: "absolute",
     width: 86,
     height: 19,
-    top: 418,
+    top: 427,
     left: 167,
   },
   pawImage: {
-    position: "absolute",
     width: 110,
     height: 123,
-    top: 700,
+    top: 590,
     left: 288,
   },
-  filtersContainer: {
-    display: "flex",
-    flexDriection: "row",
-    justifyContent: "space-between",
+  filters:{
+    display: 'flex',
+    border: '1px solid rgba(0, 0, 0, 0.50)',
+    borderRadius: 10,
+    justifyContent: 'space-between',
+    paddingLeft: 12,
+    paddingTop: 4,
+    paddingRight: 4,
+    paddingBottom: 4,
+    flexDirection: 'row'
   },
-  filters1: {
-    position: "absolute",
-    width: 88,
-    height: 28,
-    top: 97,
-    left: 20,
-    padding: "4px 4px 4px 12px",
-    borderRadius: 6,
-    border: 1,
-    cursor: 'Pointer'
-  },
-  filters2: {
-    position: "absolute",
-    width: 88,
-    height: 28,
-    top: 97,
-    left: 120,
-    padding: "4px 4px 4px 12px",
-    borderRadius: 6,
-    border: 1,
-    cursor: 'Pointer'
-  },
-  filters3: {
-    position: "absolute",
-    width: 88,
-    height: 28,
-    top: 97,
-    left: 210,
-    padding: "4px 4px 4px 12px",
-    borderRadius: 6,
-    border: 1,
-    cursor: 'Pointer'
-  },
-  filters4: {
-    position: "absolute",
-    width: 88,
-    height: 28,
-    top: 97,
-    left: 300,
-    padding: "4px 4px 4px 12px",
-    borderRadius: 6,
-    border: 1,
-    cursor: 'Pointer'
-  },
+  filtersText:{
+  fontFamily: 'Roboto',
+  fontSize: 14,
+  opacity: 0.6,
+  paddingRight: 8,
+  }
 });
