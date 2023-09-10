@@ -5,35 +5,51 @@ import {
   View,
   TouchableOpacity,
   Text,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { useState } from "react";
 import FilterIcons from "../components/FilterIcons";
 import DetailCard from "../components/DetailCard";
 import Navbar from "./Navbar";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [filter, setFilter] = useState(false);
   const [detail, setDetail] = useState(false);
+
   return (
     <View style={style.background}>
       <Navbar />
-      <View style={{top:90}}>
-      <ScrollView horizontal={true} contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', margin: 10 }}>
-        <TouchableOpacity style={style.filters}>
-          <Text style={style.filtersText}>Sort by</Text>
-          <Image source={require('../assets/gridicons_dropdown.png')} resizeMode='contain' style={{height: 19, width: 19}}/>
-        </TouchableOpacity>
-        <TouchableOpacity style={style.filters}>
-          <Text style={style.filtersText}>Vet Hospital</Text>
-          <Image source={require('../assets/gridicons_dropdown.png')} resizeMode='contain' style={{height: 19, width: 19}}/>
-        </TouchableOpacity>
-        <TouchableOpacity style={style.filters}>
-          <Text style={style.filtersText}>Open</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={style.filters}>
-          <Text style={style.filtersText}>Distance</Text>
-        </TouchableOpacity>
+      <View style={{ top: 90 }}>
+        <ScrollView
+          horizontal={true}
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: "space-between",
+            margin: 10,
+          }}
+        >
+          <TouchableOpacity style={style.filters}>
+            <Text style={style.filtersText}>Sort by</Text>
+            <Image
+              source={require("../assets/gridicons_dropdown.png")}
+              resizeMode="contain"
+              style={{ height: 19, width: 19 }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={style.filters} >
+            <Text style={style.filtersText}>Vet Hospital</Text>
+            <Image
+              source={require("../assets/gridicons_dropdown.png")}
+              resizeMode="contain"
+              style={{ height: 19, width: 19 }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={style.filters}>
+            <Text style={style.filtersText}>Open</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={style.filters}>
+            <Text style={style.filtersText}>Distance</Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
       <View
@@ -43,7 +59,7 @@ const Home = () => {
         <TouchableOpacity onPress={() => setFilter(!filter)}>
           {filter ? (
             <View style={style.openFilter}>
-              <FilterIcons />
+              <FilterIcons navigation={navigation} />
               <View style={style.searchEllipse1}></View>
               <View style={style.searchEllipse2}></View>
               <View style={style.searchEllipse3}></View>
@@ -72,6 +88,7 @@ const Home = () => {
               topRightRadius={30}
               bottomLeftRadius={0}
               bottomRightRadius={0}
+              navigation={navigation}
             />
           ) : (
             <>
@@ -91,11 +108,11 @@ const Home = () => {
           style={style.camera}
           resizeMode="cover"
         />
-                <ImageBackground
-                  source={require("../assets/pawImage.png")}
-                  style={style.pawImage}
-                  resizeMode="contain"
-                />
+        <ImageBackground
+          source={require("../assets/pawImage.png")}
+          style={style.pawImage}
+          resizeMode="contain"
+        />
       </View>
     </View>
   );
@@ -226,21 +243,28 @@ const style = StyleSheet.create({
     top: 590,
     left: 288,
   },
-  filters:{
-    display: 'flex',
-    border: '1px solid rgba(0, 0, 0, 0.50)',
+  filters: {
+    display: "flex",
+    border: "1px solid rgba(0, 0, 0, 0.50)",
     borderRadius: 10,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     paddingLeft: 12,
     paddingTop: 4,
     paddingRight: 4,
     paddingBottom: 4,
-    flexDirection: 'row'
+    flexDirection: "row",
   },
-  filtersText:{
-  fontFamily: 'Roboto',
-  fontSize: 14,
-  opacity: 0.6,
-  paddingRight: 8,
-  }
+  filtersText: {
+    fontFamily: "Roboto",
+    fontSize: 14,
+    opacity: 0.6,
+    paddingRight: 8,
+  },
+  searchIcon: {
+    position: "absolute",
+    width: 26,
+    height: 25,
+    left: 31,
+    top: 30,
+  },
 });

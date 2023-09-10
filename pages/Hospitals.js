@@ -7,15 +7,22 @@ import {
 } from "react-native";
 import HospitalDetail from "../components/HospitalDetail";
 
-const Hospital = () => {
+const Hospital = ({ route, navigation }) => {
+  console.log(navigation, route);
   return (
     <View>
       <View style={style.headingContainer}>
-        <ImageBackground
-          source={require("../assets/ic-left.png")}
-          style={style.icLeft}
-          resizeMode="cover"
-        />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Home");
+          }}
+        >
+          <ImageBackground
+            source={require("../assets/ic-left.png")}
+            style={style.icLeft}
+            resizeMode="cover"
+          />
+        </TouchableOpacity>
         <View style={style.heading}>
           <Text style={style.headingText}>Vet Hospital List</Text>
         </View>
@@ -67,7 +74,7 @@ const Hospital = () => {
           <Text style={style.serviceText}>Distance</Text>
         </TouchableOpacity>
       </View>
-      <View style={{flexDirection:'col', gap: 15}}>
+      <View style={{ flexDirection: "col", gap: 15 }}>
         <HospitalDetail />
         <HospitalDetail />
       </View>
@@ -93,6 +100,7 @@ const style = StyleSheet.create({
     width: 24,
     height: 24,
     alignItems: "center",
+    cursor: "Pointer",
   },
   heading: {
     position: "absolute",
@@ -104,7 +112,7 @@ const style = StyleSheet.create({
   headingText: {
     fontFamily: "Roboto",
     fontSize: 20,
-    fontWeight: 700
+    fontWeight: 700,
   },
   sectionTitle: {
     left: 3,

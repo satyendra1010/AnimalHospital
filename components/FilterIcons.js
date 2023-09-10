@@ -1,14 +1,19 @@
-import { StyleSheet, ImageBackground, View } from "react-native";
+import { useEffect } from "react";
+import { StyleSheet, ImageBackground, View, TouchableOpacity } from "react-native";
 
 const FilterIcons = (props) => {
+  const navigate = () => {
+    props.navigation.navigate("Hospitals");
+  };
+
   return (
-    <View>
+    <TouchableOpacity onPress={()=>{navigate()}}>
       <ImageBackground
-        source={require('../assets/serach.png')}
+        source={require("../assets/serach.png")}
         style={style.searchIcon}
         resizeMode="cover"
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 

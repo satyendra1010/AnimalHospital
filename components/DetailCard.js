@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { ImageBackground, StyleSheet, View, Text } from "react-native";
+import { TouchableOpacity } from "react-native-web";
 
 const DetailCard = (props) => {
   const top = {
@@ -30,7 +31,8 @@ const DetailCard = (props) => {
       .join("&");
     try {
       const url =
-        "https://us-east-1.aws.data.mongodb-api.com/app/data-pngam/endpoint/data/v1/action/find?" + queryString;
+        "https://us-east-1.aws.data.mongodb-api.com/app/data-pngam/endpoint/data/v1/action/find?" +
+        queryString;
       let response = await fetch(url, {
         method: "POST",
 
@@ -48,10 +50,22 @@ const DetailCard = (props) => {
 
   return (
     <View style={[style.container, top]}>
+      <TouchableOpacity
+        onPress={() => {
+          props.navigation.navigate("Overview");
+        }}
+      >
+        <ImageBackground
+          source={require("../assets/open.png")}
+          resizeMode="contain"
+          style={{ width: 10, height: 10 }}
+        />
+      </TouchableOpacity>
       <View style={style.headingContainer}>
         <View style={style.heading}>
           <Text style={style.headingFont}>Outside Animal Hospital</Text>
         </View>
+
         <ImageBackground
           source={require("../assets/star.png")}
           style={style.rating}
